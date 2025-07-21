@@ -99,4 +99,4 @@ Heads
 
 ## Author
 
-Developed for educational purposes by Kubix Creative.
+Developed for educational purposes by Abdul Azeem.
