@@ -1,102 +1,46 @@
-# Quantum Coin Toss Simulator
+# Quantum 3-Coin Flip Simulator (PennyLane)
 
-This project simulates a fair coin toss using quantum computing principles via the PennyLane library. It demonstrates quantum superposition and measurement, making it suitable for those beginning with quantum computing.
+This project simulates the flipping of **3 quantum coins** using the **PennyLane** quantum computing library. It uses Hadamard gates to create quantum superpositions and measurements to simulate probabilistic outcomes — demonstrating **quantum randomness**.
 
-## Project Overview
+## 💡 Motivation
 
-The simulator uses a single qubit to show how a quantum system can mimic the randomness of a coin toss. The qubit is placed in a superposition state using a Hadamard gate and then measured, collapsing the state into either |0⟩ (Heads) or |1⟩ (Tails).
+Classical coins yield deterministic outcomes based on physical conditions. In contrast, quantum coin flips harness **superposition and measurement** — truly random, rooted in quantum mechanics.
 
----
-
-## Quantum Concepts
-
-- **Qubits**: Quantum bits that can be in state |0⟩, |1⟩, or any superposition of both.
-- **Hadamard Gate**: Places the qubit into a 50/50 superposition of |0⟩ and |1⟩.
-- **Measurement**: Collapses the superposition to one of the basis states (0 or 1), simulating randomness.
+This simulation helps in visualizing and analyzing the statistical nature of quantum randomness using 3 independent qubits.
 
 ---
 
-## Technologies Used
+## 🧪 How It Works
 
-- Python 3.13
-- [PennyLane](https://pennylane.ai/) (v0.42.0)
-- PennyLane Lightning Simulator (backend)
+1. **Initialize 3 Qubits**: All start in the |0⟩ (Tails) state.
+2. **Apply Hadamard Gates**: Each qubit becomes a superposition:  
+   \|ψ⟩ = (|0⟩ + |1⟩)/√2
+3. **Measure**: Collapse state to either |0⟩ or |1⟩.
+4. **Interpretation**:
+   - |0⟩ = Tails (T)
+   - |1⟩ = Heads (H)
 
 ---
 
-## How to Run
+## 📊 Example Results from 1000 Simulations
 
-### Prerequisites
+| Outcome | Count |
+|---------|-------|
+| HHH     | ~125  |
+| HHT     | ~122  |
+| HTH     | ~130  |
+| HTT     | ~115  |
+| THH     | ~126  |
+| THT     | ~120  |
+| TTH     | ~128  |
+| TTT     | ~134  |
 
-- Python 3.13 installed
-- PennyLane and its backends installed:
-  ```bash
-  pip install pennylane pennylane-lightning
-  ```
+> 📈 Output is visualized using matplotlib and saved as `results/coin_flip_histogram.png`
 
-### Execution
+---
 
-Run the following command in your terminal:
+## 🚀 Run the Project
 
 ```bash
-python quantum_coin_toss.py
-```
-
----
-
-## File Structure
-
-```text
-quantum_randomness_analyzer/
-│
-├── quantum_coin_toss.py       # Main script to run the coin toss
-├── Quantum_Coin_Toss_Simulator_Report.pdf  # Detailed project report
-└── README.md                  # This file
-```
-
----
-
-## Code Explanation
-
-Below is the main part of the code with comments:
-
-```python
-import pennylane as qml
-import numpy as np
-
-# Define a quantum device with 1 wire (qubit) and 1 shot per execution
-dev = qml.device("default.qubit", wires=1, shots=1)
-
-@qml.qnode(dev)
-def coin_toss():
-    qml.Hadamard(wires=0)  # Apply Hadamard gate to create superposition
-    return qml.sample(qml.PauliZ(wires=0))  # Measure the qubit
-
-# Run the coin toss
-result = coin_toss()
-
-# Interpret result
-print("Heads" if result == 1 else "Tails")
-```
-
----
-
-## Output Example
-
-```text
-Heads
-```
-
----
-
-## Potential Improvements
-
-- Simulate multiple tosses
-- Add probability analysis
-- Visualize outcomes
-
----
-
-## Author
-
-Developed for educational purposes by Abdul Azeem.
+pip install -r requirements.txt
+python quantum_three_coin_flip.py
